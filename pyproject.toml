@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "DW - Empresas brasileiras CNPJ"
+version = "0.1.0"
+description = "Dados de empresas brasileiras com CNPJ. O Cadastro Nacional da Pessoa Jurídica (CNPJ) é um banco de dados gerenciado pela Secretaria Especial da Receita Federal do Brasil (RFB), que armazena informações cadastrais das pessoas jurídicas e outras entidades de interesse das administrações tributárias da União, dos Estados, do Distrito Federal e dos Municípios. A periodicidade de atualização dos dados é mensal."
+authors = ["Breno Mendes Bernardo"]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+pandas = "^2.2.2"
+duckdb = "^0.10.2"
+taskipy = "^1.12.2"
+mkdocs = "^1.6.0"
+
+[tool.poetry.dev-dependencies]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
