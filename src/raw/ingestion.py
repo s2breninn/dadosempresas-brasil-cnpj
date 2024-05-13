@@ -1,4 +1,5 @@
 import os
+import shutil
 import requests
 import wget
 import zipfile
@@ -76,11 +77,18 @@ class DataIngestor:
             except Exception as e:
                 print(f"Erro ao extrair o arquivo '{zip_file}': {e}")
 
+    def delete_zip_files(self):
+        try:
+            shutil.rmtree(self.zip_folder)
+            print(f'Diretory {self.zip_folder} deleted successfully')
+        except OSError as o:
+            print(f'Error, {o.strerror}: {self.zip_folder}')
+
     def ingest_data(self) -> None:
-        #links = self.extract_links()
-        #zip_files = self.download_files(links)
-        zip_files = ['Empresas0.zip', 'Empresas0.ziplm7_i9u1.tmp', 'Empresas6.zip', 'Empresas3.zip', 'Estabelecimentos0.zip', 'Empresas1.zip', 'Empresas9.zip', 'Empresas7.zip', 'Cnaes.zip', 'Empresas5.zip', 'Empresas4.zip', 'Estabelecimentos2.zip', 'Estabelecimentos3.zip', 'Estabelecimentos4.zipms3j0jsb.tmp', 'Estabelecimentos1.zip', 'Empresas8.zip', 'Empresas2.zip']
+        links = self.extract_links()
+        zip_files = self.download_files(links)
         self.extract_files(zip_files)
+        self.delete_zip_files(zip_files)
 
 if __name__ == '__main__':
     base_directory = os.path.join('src', 'data') 
