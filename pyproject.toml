@@ -1,3 +1,6 @@
+[tool.taskipy.tasks]
+ingestion = "python src/raw/ingestion.py"
+
 [tool.poetry]
 name = "DW - Empresas brasileiras CNPJ"
 version = "0.1.0"
@@ -10,6 +13,9 @@ pandas = "^2.2.2"
 duckdb = "^0.10.2"
 taskipy = "^1.12.2"
 mkdocs = "^1.6.0"
+requests = "^2.31.0"
+wget = "^3.2"
+bs4 = "^0.0.2"
 
 [tool.poetry.dev-dependencies]
 

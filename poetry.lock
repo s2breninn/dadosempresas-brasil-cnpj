@@ -1,4 +1,49 @@
 [[package]]
+name = "beautifulsoup4"
+version = "4.12.3"
+description = "Screen-scraping library"
+category = "main"
+optional = false
+python-versions = ">=3.6.0"
+
+[package.dependencies]
+soupsieve = ">1.2"
+
+[package.extras]
+cchardet = ["cchardet"]
+chardet = ["chardet"]
+charset-normalizer = ["charset-normalizer"]
+html5lib = ["html5lib"]
+lxml = ["lxml"]
+
+[[package]]
+name = "bs4"
+version = "0.0.2"
+description = "Dummy package for Beautiful Soup (beautifulsoup4)"
+category = "main"
+optional = false
+python-versions = "*"
+
+[package.dependencies]
+beautifulsoup4 = "*"
+
+[[package]]
+name = "certifi"
+version = "2024.2.2"
+description = "Python package for providing Mozilla's CA Bundle."
+category = "main"
+optional = false
+python-versions = ">=3.6"
+
+[[package]]
+name = "charset-normalizer"
+version = "3.3.2"
+description = "The Real First Universal Charset Detector. Open, modern and actively maintained alternative to Chardet."
+category = "main"
+optional = false
+python-versions = ">=3.7.0"
+
+[[package]]
 name = "click"
 version = "8.1.7"
 description = "Composable command line interface toolkit"
@@ -38,6 +83,14 @@ python-dateutil = ">=2.8.1"
 
 [package.extras]
 dev = ["twine", "markdown", "flake8", "wheel"]
+
+[[package]]
+name = "idna"
+version = "3.7"
+description = "Internationalized Domain Names in Applications (IDNA)"
+category = "main"
+optional = false
+python-versions = ">=3.5"
 
 [[package]]
 name = "jinja2"
@@ -259,12 +312,38 @@ python-versions = ">=3.6"
 pyyaml = "*"
 
 [[package]]
+name = "requests"
+version = "2.31.0"
+description = "Python HTTP for Humans."
+category = "main"
+optional = false
+python-versions = ">=3.7"
+
+[package.dependencies]
+certifi = ">=2017.4.17"
+charset-normalizer = ">=2,<4"
+idna = ">=2.5,<4"
+urllib3 = ">=1.21.1,<3"
+
+[package.extras]
+socks = ["PySocks (>=1.5.6,!=1.5.7)"]
+use_chardet_on_py3 = ["chardet (>=3.0.2,<6)"]
+
+[[package]]
 name = "six"
 version = "1.16.0"
 description = "Python 2 and 3 compatibility utilities"
 category = "main"
 optional = false
 python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*"
+
+[[package]]
+name = "soupsieve"
+version = "2.5"
+description = "A modern CSS selector implementation for Beautiful Soup."
+category = "main"
+optional = false
+python-versions = ">=3.8"
 
 [[package]]
 name = "taskipy"
@@ -297,6 +376,20 @@ optional = false
 python-versions = ">=2"
 
 [[package]]
+name = "urllib3"
+version = "2.2.1"
+description = "HTTP library with thread-safe connection pooling, file post, and more."
+category = "main"
+optional = false
+python-versions = ">=3.8"
+
+[package.extras]
+brotli = ["brotli (>=1.0.9)", "brotlicffi (>=0.8.0)"]
+h2 = ["h2 (>=4,<5)"]
+socks = ["pysocks (>=1.5.6,!=1.5.7,<2.0)"]
+zstd = ["zstandard (>=0.18.0)"]
+
+[[package]]
 name = "watchdog"
 version = "4.0.0"
 description = "Filesystem events monitoring"
@@ -307,16 +400,29 @@ python-versions = ">=3.8"
 [package.extras]
 watchmedo = ["PyYAML (>=3.10)"]
 
+[[package]]
+name = "wget"
+version = "3.2"
+description = "pure python download utility"
+category = "main"
+optional = false
+python-versions = "*"
+
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.10"
-content-hash = "4f6e26c398ff1c98c3a586df7fadf6e0e76654c8069796dcb146e561c9b85cbe"
+content-hash = "675e84fa5bed1357e154c76b6e59da08692d4f5ddcbf984177eed74334aaa796"
 
 [metadata.files]
+beautifulsoup4 = []
+bs4 = []
+certifi = []
+charset-normalizer = []
 click = []
 colorama = []
 duckdb = []
 ghp-import = []
+idna = []
 jinja2 = []
 markdown = []
 markupsafe = []
@@ -334,8 +440,12 @@ python-dateutil = []
 pytz = []
 pyyaml = []
 pyyaml-env-tag = []
+requests = []
 six = []
+soupsieve = []
 taskipy = []
 tomli = []
 tzdata = []
+urllib3 = []
 watchdog = []
+wget = []
