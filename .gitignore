@@ -162,5 +162,5 @@ cython_debug/
 #.idea/
 
 # Folders
-src/data/**/*.csv
+src/data/extracted/*.*
 src/data/**/*.zip
