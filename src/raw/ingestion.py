@@ -64,20 +64,20 @@ class DataIngestor:
     def extract_files(self, zip_files: List[str]) -> None:
         for zip_file in zip_files:
             try:
-                if os.path.exists(zip_file):
+                if self.file_exists(zip_file):
                     with zipfile.ZipFile(zip_file, 'r') as zip_ref:
                         extract_folder = self.create_directory_by_file_name(zip_file)
                         
                         zip_ref.extractall(extract_folder)
                         print(f'Arquivos de {zip_file} extraídos para: {extract_folder}')
 
-                        self.fix_uft8_encoding(self.extracted_folder)
+                        self.fix_uft8_encoding()
                 else:
                     print(f'O arquivo {zip_file} não existe.')
             except Exception as e:
                 print(f"Erro ao extrair o arquivo '{zip_file}': {e}")
     
-    def fix_uft8_encoding(self):
+    def fix_uft8_encoding(self) -> None:
         for root, dirs, files in os.walk(self.extracted_folder):
             for file in files:
                 file_path = os.path.join(root, file)
@@ -93,15 +93,11 @@ class DataIngestor:
 
         directory_path = os.path.join(self.extracted_folder, directory_name)
 
-        if not os.path.exists(directory_path):
-            try:
-                os.makedirs(directory_path)
-            except Exception as e:
-                print(f'Error creating directory: {file_name}: {e}')
-        
+        self.create_folder(directory_path)
+
         return directory_path
 
-    def delete_zip_files(self):
+    def delete_zip_files(self) -> None:
         try:
             shutil.rmtree(self.zip_folder)
             print(f'Diretório {self.zip_folder} deletado com sucesso.')
