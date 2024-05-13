@@ -1,4 +1,5 @@
 import os
+import re
 import shutil
 import requests
 import wget
@@ -62,25 +63,48 @@ class DataIngestor:
 
     def extract_files(self, zip_files: List[str]) -> None:
         for zip_file in zip_files:
-            zip_file = f'src/data/zip/{zip_file}'
             try:
-                # Verifica se o arquivo ZIP existe
                 if os.path.exists(zip_file):
                     with zipfile.ZipFile(zip_file, 'r') as zip_ref:
-                        # Cria o diretório 'extracted' para os arquivos extraídos
-                        extract_folder = self.extracted_folder
+                        extract_folder = self.create_directory_by_file_name(zip_file)
                         
                         zip_ref.extractall(extract_folder)
                         print(f'Arquivos de {zip_file} extraídos para: {extract_folder}')
+
+                        self.fix_uft8_encoding(self.extracted_folder)
                 else:
                     print(f'O arquivo {zip_file} não existe.')
             except Exception as e:
                 print(f"Erro ao extrair o arquivo '{zip_file}': {e}")
+    
+    def fix_uft8_encoding(self):
+        for root, dirs, files in os.walk(self.extracted_folder):
+            for file in files:
+                file_path = os.path.join(root, file)
+                with open(file_path, 'r', errors='replace') as f:
+                    content = f.read()
+                    with open(file_path, 'w', encoding='utf-8') as wf:
+                        wf.write(content)
+                    print(f'{file_path} convertido para UTF-8.')
+    
+    def create_directory_by_file_name(self, zip_file: str) -> str:
+        file_name = re.sub(r'\.zip$', '', zip_file.split('/')[-1])
+        directory_name = ''.join(re.findall('[a-zA-Z]', file_name))
+
+        directory_path = os.path.join(self.extracted_folder, directory_name)
+
+        if not os.path.exists(directory_path):
+            try:
+                os.makedirs(directory_path)
+            except Exception as e:
+                print(f'Error creating directory: {file_name}: {e}')
+        
+        return directory_path
 
     def delete_zip_files(self):
         try:
             shutil.rmtree(self.zip_folder)
-            print(f'Diretory {self.zip_folder} deleted successfully')
+            print(f'Diretório {self.zip_folder} deletado com sucesso.')
         except OSError as o:
             print(f'Error, {o.strerror}: {self.zip_folder}')
 
@@ -88,7 +112,7 @@ class DataIngestor:
         links = self.extract_links()
         zip_files = self.download_files(links)
         self.extract_files(zip_files)
-        self.delete_zip_files(zip_files)
+        #self.delete_zip_files()
 
 if __name__ == '__main__':
     base_directory = os.path.join('src', 'data') 
