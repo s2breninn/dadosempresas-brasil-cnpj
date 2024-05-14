@@ -1,0 +1,91 @@
+{
+    "tabelas": {
+      "Socios": [
+        "cnpj_basico",
+        "indetificador_socio",
+        "nome_social",
+        "cnpj_cpf",
+        "cd_qualificacao",
+        "dt_entrada_sociedade",
+        "pais",
+        "representante_legal",
+        "nome_representante",
+        "cd_quali_representante_legal",
+        "faixa_etaria"
+      ],
+      "Estabelecimentos": [
+        "cnpj_basico",
+        "cnpj_ordem",
+        "cnpj_dv",
+        "cd_indentificador_matriz",
+        "nome_fantasia",
+        "dt_situacao_cadas",
+        "cd_motivo_cadas",
+        "inscricao_estadual",
+        "nome_cidade_ext",
+        "pais",
+        "dt_inicio_atividade",
+        "cnae_fiscal_principal",
+        "cnae_fiscal_secundaria",
+        "tipo_logradouro",
+        "logradouro",
+        "numero",
+        "complemento",
+        "bairro",
+        "cep",
+        "uf",
+        "cd_municipio",
+        "ddd1",
+        "tel1",
+        "ddd2",
+        "tel2",
+        "ddd_fax",
+        "fax",
+        "email",
+        "situacao_especial",
+        "dt_situacao_especial"
+      ],
+      "CNAEs": [
+        "cnae_segundaria",
+        "descricao"
+      ],
+      "Motivo": [
+        "cd_motivo",
+        "motivo"
+      ],
+      "Qualificacoes": [
+        "cd_qualificacao",
+        "qualificacao"
+      ],
+      "Empresas": [
+        "cnpj_basico",
+        "nome_empresarial",
+        "cd_natureza_juridica",
+        "cd_qualificacao",
+        "capital_social_empresa",
+        "cd_porte_empresa",
+        "ente_federativo_responsavel"
+      ],
+      "Paises": [
+        "cd_pais",
+        "pais"
+      ],
+      "Municipios": [
+        "cd_municipio",
+        "municipio"
+      ],
+      "Naturezas": [
+        "cd_natureza_juridica",
+        "natureza_juridica"
+      ],
+      "Simples": [
+        "cnpj_basico",
+        "opcao_simples",
+        "dt_opcao_simples",
+        "dt_exclu_simples",
+        "opcao_mei",
+        "dt_opcao_mei",
+        "dt_exclu_mei"
+      ]
+    }
+  }
