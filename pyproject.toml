@@ -1,5 +1,6 @@
 [tool.taskipy.tasks]
 ingestion = "python src/raw/ingestion.py"
+silver = "python src/silver/silver.py"
 
 [tool.poetry]
 name = "DW - Empresas brasileiras CNPJ"
