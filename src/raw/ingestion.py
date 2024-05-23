@@ -62,7 +62,9 @@ class DataIngestor:
         return os.path.exists(file_path)
 
     def extract_files(self, zip_files: List[str]) -> None:
-        for zip_file in zip_files:
+        processed_and_extracted_files = []
+
+        for (root, dirs, files), zip_file in zip(os.walk(self.extracted_folder), zip_files):
             try:
                 if self.file_exists(zip_file):
                     with zipfile.ZipFile(zip_file, 'r') as zip_ref:
@@ -70,23 +72,29 @@ class DataIngestor:
                         
                         zip_ref.extractall(extract_folder)
                         print(f'Arquivos de {zip_file} extraídos para: {extract_folder}')
-
-                        self.fix_uft8_encoding()
+                        
+                        for file in files:
+                            if file not in processed_and_extracted_files:
+                                file_processed_utf8 = self.fix_uft8_encoding(root, file)
+                                if file_processed_utf8 is not None:
+                                    processed_and_extracted_files.append(file_processed_utf8)
                 else:
                     print(f'O arquivo {zip_file} não existe.')
             except Exception as e:
                 print(f"Erro ao extrair o arquivo '{zip_file}': {e}")
     
-    def fix_uft8_encoding(self) -> None:
-        for root, dirs, files in os.walk(self.extracted_folder):
-            for file in files:
-                file_path = os.path.join(root, file)
-                with open(file_path, 'r', errors='replace') as f:
-                    content = f.read()
-                    with open(file_path, 'w', encoding='utf-8') as wf:
-                        wf.write(content)
-                    print(f'{file_path} convertido para UTF-8.')
-    
+    def fix_uft8_encoding(self, root, file) -> None:
+        try:
+            file_path = os.path.join(root, file)
+            with open(file_path, 'r', errors='replace') as f:
+                content = f.read()
+                with open(file_path, 'w', encoding='utf-8') as wf:
+                    wf.write(content)
+            print(f'{file_path} convertido para UTF-8.')
+            return file_path
+        except UnicodeTranslateError as e:
+            print(f'Erro ao converter unicode UTF-8: {e}')
+
     def create_directory_by_file_name(self, zip_file: str) -> str:
         file_name = re.sub(r'\.zip$', '', zip_file.split('/')[-1])
         directory_name = ''.join(re.findall('[a-zA-Z]', file_name))
