@@ -25,9 +25,9 @@ class DataProcessor:
         except duckdb.Error as e:
             raise RuntimeError(f"Erro ao conectar no banco de dados: {e}")
 
-    def create_table(self, table_name: str, df):
+    def create_table(self, table_name: str, name_file: str):
         try:
-            self.connection.execute(f'CREATE TABLE IF NOT EXISTS {table_name} AS SELECT * FROM df')
+            self.connection.execute(f'CREATE TABLE IF NOT EXISTS {table_name} AS SELECT * FROM {name_file}')
             print(f'Tabela {table_name} criada com sucesso.')
         except duckdb.Error as e:
             print(f'Erro ao criar tabela {table_name}: {e}')
@@ -65,6 +65,7 @@ class DataProcessor:
                     path_file_name_parquet = os.path.join(self.parquet_folder, file_name_parquet)
 
                     self.csv_to_parquet(dir_path_full_data_csv, columns, path_file_name_parquet)
+                    self.create_table(table_name, path_file_name_parquet)
 
     def process_data(self):
         self.create_folder(self.parquet_folder)
