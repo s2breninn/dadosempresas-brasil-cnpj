@@ -162,6 +162,7 @@ cython_debug/
 #.idea/
 
 # Folders
-src/data/extracted/**/*
-src/data/**/*.zip
+src/data/**
+src/gold
 dbrfbcnpj.db
+assets/logo**
