@@ -27,7 +27,7 @@ class DataProcessor:
 
     def create_table(self, table_name: str, path_file_name_parquet: str):
         try:
-            self.connection.execute(f'CREATE TABLE {table_name} AS SELECT * FROM {path_file_name_parquet}')
+            self.connection.execute(f'CREATE TABLE "{table_name}" AS SELECT * FROM "{path_file_name_parquet}"')
             print(f'Tabela {table_name} criada com sucesso.')
         except duckdb.Error as e:
             print(f'Erro ao criar tabela {table_name}: {e}')
