@@ -16,7 +16,26 @@ pag3 = 'Cnaes'
 pag4 = 'Motivos'
 pag5 = 'Municipios'
 
+def filter_search():
+   st.write('Filtro')
+   col1, col2 = st.columns([1,1])
+   with col1:
+      st.text_input('Busca: ')
+      st.text_input('Razão Social: ')
+      st.text_input('Nome/Razão Social do Socio: ')
+      st.selectbox('Qualificações de Sócio: ', ['Todos', 'Nome Exterior', 'Pessoa Física', 'Pessoa Jurídico'])
+   with col2:
+      st.text_input('CNPJ: ')
+      st.text_input('CPF/CNPJ do Socio: ')
+      st.selectbox('Tipo de Sócio: ', ['Todos', 'Nome Exterior', 'Pessoa Física', 'Pessoa Jurídico'])
+
+   st.button('Pesquisar')
+
 st.set_page_config('Dados CNPJ - RFB', layout='wide', page_icon=':shark:')
+
+st.header('Quadros societários e de administradores das pessoas jurídicas brasileiras.')
+st.write('Fonte original: [Receita Federal Brasileira](%s)' % 'https://www.gov.br/receitafederal/pt-br')
+st.write('Código fonte: [Git Hub](%s)' % 'https://github.com/s2breninn/dadosempresas-brasil-cnpj')
 
 with st.sidebar:
     st.title('Dados de empresas brasileiras')
